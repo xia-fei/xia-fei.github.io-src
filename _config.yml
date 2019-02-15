@@ -65,7 +65,7 @@ ga_domain: yoursite
 # Sidebar settings
 sidebar: true                       # whether or not using Sidebar.
 sidebar-about-description: "给时光已生命，给岁月已文明"
-sidebar-avatar: /img/avatar/ironman.png      # use absolute URL, seeing it's used in both `/` and `/about/`
+sidebar-avatar: /img/me.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 widgets:
 - featured-tags
 - short-about
