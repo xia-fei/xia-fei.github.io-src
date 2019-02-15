@@ -20,19 +20,21 @@ fixed: false
 
 ### 兴趣方向
 
-> 容器云（Docker、Kubernetes等）相关生态技术研究。
+> Spring Cloud,Spring Boot相关生态技术研究。
+> http协议的思想
+> TCP网络通讯
+### 小工具网站分享
 
-### 参与社区
-
- > CSDN博客:http://blog.csdn.net/huwh_
+ > 图床: https://image.xia-fei.com
  >
- > Github:https://github.com/huweihuang
+ > mysql日志转sql: https://sql.xia-fei.com
  >
- > 阿里云栖社区:https://yq.aliyun.com/u/huweihuang
+ > sql建表语句转java对象: https://sql.xia-fei.com
  >
- > DockOne社区:http://dockone.io/people/胡伟煌
+ > 网络记事本: https://note.xia-fei.com  (https://note.xia-fei.com/可随意输入)     
+ >
 
 ### 联系我
 
->Email: huweihuang@foxmail.com
+>Email: xiafei.dev@gmail.com
 
