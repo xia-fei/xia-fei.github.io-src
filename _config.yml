@@ -25,8 +25,8 @@ SEOTitle: 夏飞 | Blog
 email: e-mail_address
 description: ""
 keyword: ""
-header-img: /img/header_img/home.jpg
-article-img: /img/article_header/article_bg.jpg
+header-img: https://xiafei-web.oss-cn-hangzhou.aliyuncs.com/file-server/1550217509364.jpg
+article-img: https://xiafei-web.oss-cn-hangzhou.aliyuncs.com/file-server/1550217547280.png
 404-img: /img/header_img/404.png
 signature: false #show signature
 signature-img: img/signature/BeanTechSign-white.png 
