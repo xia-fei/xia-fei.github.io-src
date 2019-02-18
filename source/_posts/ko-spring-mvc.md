@@ -1,23 +1,16 @@
 ---
-title: 搞定springMVC vue history分析
+title: springMVC请求流程
 date: 2019-01-15 17:05:30
-tags: spring-mvc
+tags: spring
 ---
 
 
-## 动机
-解决 vue 路由 history模式  
-将所有`/**/*` 定位为到同一个html文件
-<!-- more -->
 
-要解决的问题  
-1. 此路由匹配优先级得在controller之后  
-2. 此路由匹配优先级得再 静态资源之前,应为springMVC默认 有/**兜底
 
 springMVC简单来说就是一个Servlet  
 `org.springframework.web.servlet.DispatcherServlet`
 一切代码都是围绕`protected void doDispatch(HttpServletRequest request, HttpServletResponse response)`展开
-
+<!-- more -->
 
 ## 代码机构
 - org.springframework.web.servlet.HandlerMapping
@@ -75,83 +68,4 @@ public abstract class AbstractUrlHandlerMapping extends AbstractHandlerMapping i
 ```java
 new AntPathMatcher(String pattern, String path).match();
 new UrlPathHelper().getLookupPathForRequest(HttpServletRequest request);
-```
-
-## 解决一
-
-返回指定html文件
-```
-public class HtmlRequestMapping implements HttpRequestHandler {
-    private String htmlPath;
-
-    public HtmlRequestMapping(String htmlPath) {
-        this.htmlPath = htmlPath;
-    }
-
-    @Override
-    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType(MediaType.TEXT_HTML_VALUE);
-        FileCopyUtils.copy(Thread.currentThread().getContextClassLoader().getResourceAsStream(htmlPath),
-                response.getOutputStream());
-    }
-}
-
-```
-
-根据请求规则返回指定文件
-``` java
-public class VueSinglePage extends AbstractUrlHandlerMapping {
-
-
-
-    public VueSinglePage() {
-        registerHandler("/**/{path:[^.]+}",new HtmlRequestMapping("public/dist/index.html"));
-        registerHandler("/",new HtmlRequestMapping("public/dist/index.html"));
-    }
-
-    @Override
-    public int getOrder() {
-        return Ordered.LOWEST_PRECEDENCE-1;
-    }
-}
-```
-
-## 解决二 (推荐)
-思路会按照controller->static-mapping-> index.html 这个优先级来
-
-```properties
-spring.resources.add-mappings=false
-```
-```java
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**/*.css", "/**/*.js", "/**/*.ttf", "/**/*.woff", "/**/*.ico").addResourceLocations("classpath:/public/dist/");
-    }
-```
-```java
-
-    @Bean
-    HandlerMapping vueHandlerMapping() {
-        return new VueHandlerMapping();
-    }
-
-    class VueHandlerMapping implements HandlerMapping, Ordered {
-        @Override
-        public HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
-            return new HandlerExecutionChain(new HttpRequestHandler() {
-                @Override
-                public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                    response.setContentType(MediaType.TEXT_HTML_VALUE);
-                    FileCopyUtils.copy(Thread.currentThread().getContextClassLoader().getResourceAsStream("public/dist/index.html"),
-                            response.getOutputStream());
-                }
-            });
-        }
-
-        @Override
-        public int getOrder() {
-            return Ordered.LOWEST_PRECEDENCE;
-        }
-    }
-
 ```
