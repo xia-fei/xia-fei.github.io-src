@@ -10,6 +10,7 @@ tags: Bookmark
 ## HTTP
 1. [彻底弄懂 HTTP 缓存机制](https://www.tuicool.com/articles/zUZnUre)
 2. [数字证书原理（ssl,https）](https://blog.csdn.net/u013424496/article/details/51161370)
+3. [HTTPS 原理详解](https://baijiahao.baidu.com/s?id=1570143475599137&wfr=spider&for=pc)
 <!-- more -->
 
 ## java
